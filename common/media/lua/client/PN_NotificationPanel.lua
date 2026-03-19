@@ -88,13 +88,8 @@ end
 --- @param notification table
 --- @param width number
 --- @return number
-function PN_NotificationPanel:calculateHeight(notification, width)
+function PN_NotificationPanel:calculateHeight(notification, _width) -- luacheck: no unused args
     local h = C.TOAST_PADDING * 2
-    local textWidth = width - C.TOAST_PADDING * 2 - C.ACCENT_BAR_WIDTH - C.CLOSE_BUTTON_SIZE
-
-    if notification.icon then
-        textWidth = textWidth - C.ICON_SIZE - C.ICON_MARGIN_RIGHT
-    end
 
     if notification.title then
         local titleFont = getTitleFont()
