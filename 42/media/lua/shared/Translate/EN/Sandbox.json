@@ -1,0 +1,33 @@
+{
+    "__copyright": "Copyright (c) 2026 Phobos A. D'thorga. All rights reserved.",
+
+    "Sandbox_PhobosNotifications": "Phobos Notifications",
+
+    "Sandbox_PN_EnableNotifications_name": "Enable Notifications",
+    "Sandbox_PN_EnableNotifications_tooltip": "Enable the toast notification system. When disabled, all notification calls are silently ignored.",
+
+    "Sandbox_PN_DefaultDuration_name": "Default Duration (seconds)",
+    "Sandbox_PN_DefaultDuration_tooltip": "How long each toast notification stays on screen before auto-dismissing. Individual notifications can override this value. Range: 2-30 seconds.",
+
+    "Sandbox_PN_MaxVisible_name": "Max Visible Notifications",
+    "Sandbox_PN_MaxVisible_tooltip": "Maximum number of toast notifications shown on screen simultaneously. Additional notifications are queued and shown as slots become available. Range: 1-5.",
+
+    "Sandbox_PN_ShowProgressBar_name": "Show Progress Bar",
+    "Sandbox_PN_ShowProgressBar_tooltip": "Show a countdown progress bar at the bottom of each toast notification indicating time remaining before auto-dismiss.",
+
+    "Sandbox_PN_ToastPosition_name": "Toast Position",
+    "Sandbox_PN_ToastPosition_tooltip": "Screen corner where toast notifications appear.",
+    "Sandbox_PN_ToastPosition_option1": "Top Right",
+    "Sandbox_PN_ToastPosition_option2": "Top Left",
+    "Sandbox_PN_ToastPosition_option3": "Bottom Right",
+    "Sandbox_PN_ToastPosition_option4": "Bottom Left",
+
+    "Sandbox_PN_ToastWidth_name": "Toast Width (pixels)",
+    "Sandbox_PN_ToastWidth_tooltip": "Width of each toast notification in pixels. Range: 200-500.",
+
+    "Sandbox_PN_EnableSounds_name": "Enable Notification Sounds",
+    "Sandbox_PN_EnableSounds_tooltip": "Play a sound effect when a notification appears. Only applies to notifications that specify a sound.",
+
+    "Sandbox_PN_AnimationSpeed_name": "Animation Speed",
+    "Sandbox_PN_AnimationSpeed_tooltip": "Speed of slide-in and slide-out animations as a percentage. 100 is normal speed, 200 is twice as fast, 50 is half speed. Range: 50-200."
+}

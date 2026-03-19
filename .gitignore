@@ -1,0 +1,26 @@
+# Build/dist
+build/
+dist/
+*.zip
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Art source files
+*.psd
+*.kra
+*.blend
+*.xcf
+source-images/
+
+# Node
+node_modules/

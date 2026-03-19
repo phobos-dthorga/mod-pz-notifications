@@ -1,0 +1,10 @@
+name=Phobos' Notifications
+id=PhobosNotifications
+modversion=0.1.0
+versionMin=42.15.0
+require=\PhobosLib
+poster=poster.png
+description=Toast-style notification system for Project Zomboid Build 42. Provides a public API for cross-mod interoperability with configurable animations, colour presets, priority levels, channel filtering, and sandbox options. Requires PhobosLib.
+url=https://github.com/phobos-dthorga/mod-pz-notifications
+category=features
+pack=common

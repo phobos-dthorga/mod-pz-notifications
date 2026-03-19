@@ -1,0 +1,66 @@
+VERSION = 1,
+
+option PN.EnableNotifications
+{
+    type = boolean,
+    default = true,
+    page = PhobosNotifications,
+}
+
+option PN.DefaultDuration
+{
+    type = integer,
+    default = 5,
+    min = 2,
+    max = 30,
+    page = PhobosNotifications,
+}
+
+option PN.MaxVisible
+{
+    type = integer,
+    default = 3,
+    min = 1,
+    max = 5,
+    page = PhobosNotifications,
+}
+
+option PN.ShowProgressBar
+{
+    type = boolean,
+    default = true,
+    page = PhobosNotifications,
+}
+
+option PN.ToastPosition
+{
+    type = enum,
+    default = 1,
+    numValues = 4,
+    page = PhobosNotifications,
+}
+
+option PN.ToastWidth
+{
+    type = integer,
+    default = 350,
+    min = 200,
+    max = 500,
+    page = PhobosNotifications,
+}
+
+option PN.EnableSounds
+{
+    type = boolean,
+    default = true,
+    page = PhobosNotifications,
+}
+
+option PN.AnimationSpeed
+{
+    type = integer,
+    default = 100,
+    min = 50,
+    max = 200,
+    page = PhobosNotifications,
+}

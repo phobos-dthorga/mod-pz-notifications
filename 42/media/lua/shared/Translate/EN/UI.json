@@ -1,0 +1,15 @@
+{
+    "__copyright": "Copyright (c) 2026 Phobos A. D'thorga. All rights reserved.",
+
+    "UI_PN_Notification": "Notification",
+    "UI_PN_Dismiss": "Dismiss",
+    "UI_PN_DismissAll": "Dismiss All",
+    "UI_PN_ChannelMuted": "Channel muted",
+    "UI_PN_ChannelUnmuted": "Channel unmuted",
+    "UI_PN_NoNotifications": "No notifications",
+    "UI_PN_Channel_Default": "General",
+    "UI_PN_Priority_Low": "Low",
+    "UI_PN_Priority_Normal": "Normal",
+    "UI_PN_Priority_High": "High",
+    "UI_PN_Priority_Critical": "Critical"
+}
