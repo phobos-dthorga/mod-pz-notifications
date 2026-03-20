@@ -26,7 +26,7 @@ PN_Constants = {}
 -- Version
 ---------------------------------------------------------------
 
-PN_Constants.VERSION = "0.1.0"
+PN_Constants.VERSION = "0.2.0"
 
 ---------------------------------------------------------------
 -- Animation
@@ -80,12 +80,14 @@ PN_Constants.COLOUR_PRESET_INFO      = "info"
 PN_Constants.COLOUR_PRESET_SUCCESS   = "success"
 PN_Constants.COLOUR_PRESET_WARNING   = "warning"
 PN_Constants.COLOUR_PRESET_ERROR     = "error"
+PN_Constants.COLOUR_PRESET_TUTORIAL  = "tutorial"
 PN_Constants.COLOUR_PRESET_CUSTOM    = "custom"
 
 PN_Constants.COLOUR_INFO     = { r = 0.30, g = 0.70, b = 1.00, a = 0.95 }
 PN_Constants.COLOUR_SUCCESS  = { r = 0.30, g = 0.85, b = 0.40, a = 0.95 }
 PN_Constants.COLOUR_WARNING  = { r = 1.00, g = 0.80, b = 0.20, a = 0.95 }
 PN_Constants.COLOUR_ERROR    = { r = 1.00, g = 0.35, b = 0.30, a = 0.95 }
+PN_Constants.COLOUR_TUTORIAL = { r = 0.20, g = 0.80, b = 0.75, a = 0.95 }
 PN_Constants.COLOUR_DEFAULT  = { r = 0.60, g = 0.60, b = 0.60, a = 0.90 }
 
 PN_Constants.COLOUR_BG       = { r = 0.12, g = 0.12, b = 0.14, a = 0.92 }

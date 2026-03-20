@@ -33,10 +33,11 @@ local C = PN_Constants
 ---------------------------------------------------------------
 
 local COLOUR_MAP = {
-    [C.COLOUR_PRESET_INFO]    = C.COLOUR_INFO,
-    [C.COLOUR_PRESET_SUCCESS] = C.COLOUR_SUCCESS,
-    [C.COLOUR_PRESET_WARNING] = C.COLOUR_WARNING,
-    [C.COLOUR_PRESET_ERROR]   = C.COLOUR_ERROR,
+    [C.COLOUR_PRESET_INFO]     = C.COLOUR_INFO,
+    [C.COLOUR_PRESET_SUCCESS]  = C.COLOUR_SUCCESS,
+    [C.COLOUR_PRESET_WARNING]  = C.COLOUR_WARNING,
+    [C.COLOUR_PRESET_ERROR]    = C.COLOUR_ERROR,
+    [C.COLOUR_PRESET_TUTORIAL] = C.COLOUR_TUTORIAL,
 }
 
 local function resolveAccentColour(notification)
