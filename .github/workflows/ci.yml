@@ -106,6 +106,9 @@ jobs:
           print("All sandbox translation keys present in JSON.")
           PYEOF
 
+      - name: PZ API deny-list scan
+        run: python3 .github/pz-api-denylist.py common/media/lua/
+
       - name: Encoding check (UTF-8)
         run: |
           FAIL=0
