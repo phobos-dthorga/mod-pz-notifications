@@ -60,9 +60,9 @@ end
 ---------------------------------------------------------------
 
 local function getMutedSet(player)
-    if not player then return {} end
+    if not player then return nil end
     local md = player:getModData()
-    if not md then return {} end
+    if not md then return nil end
     if not md[PN_Constants.MD_MUTED_CHANNELS] then
         md[PN_Constants.MD_MUTED_CHANNELS] = {}
     end
@@ -75,6 +75,7 @@ end
 --- @return boolean
 function PN_ChannelRegistry.isEnabled(player, channelId)
     local muted = getMutedSet(player)
+    if not muted then return true end
     if muted[channelId] then return false end
 
     local def = channels[channelId]
@@ -89,6 +90,7 @@ end
 --- @param enabled boolean
 function PN_ChannelRegistry.setEnabled(player, channelId, enabled)
     local muted = getMutedSet(player)
+    if not muted then return end
     if enabled then
         muted[channelId] = nil
     else
