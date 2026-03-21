@@ -63,7 +63,11 @@ local function resolveIcon(iconStr)
         if ok and script then
             local iconOk, iconPath = pcall(script.getIcon, script)
             if iconOk and iconPath then
-                local tex = getTexture("Item_" .. iconPath)
+                -- Icon field may already include "Item_" prefix (e.g. "Item_POS_RawMarketNote")
+                local tex = getTexture(iconPath)
+                if tex then return tex end
+                -- Fallback: try with "Item_" prefix for vanilla items that omit it
+                tex = getTexture("Item_" .. iconPath)
                 if tex then return tex end
             end
         end
