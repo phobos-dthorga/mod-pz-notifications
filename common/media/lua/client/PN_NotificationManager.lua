@@ -56,21 +56,22 @@ end
 local function resolveIcon(iconStr)
     if not iconStr then return nil end
 
-    -- Try as item fullType first
-    local ok, result = pcall(function()
-        local script = ScriptManager.instance:getItem(iconStr)
-        if script then
-            return script:getIconTexture()
+    -- Try as item fullType → get icon path string → resolve texture
+    if ScriptManager and ScriptManager.instance then
+        local ok, script = pcall(ScriptManager.instance.getItem,
+            ScriptManager.instance, iconStr)
+        if ok and script then
+            local iconOk, iconPath = pcall(script.getIcon, script)
+            if iconOk and iconPath then
+                local tex = getTexture("Item_" .. iconPath)
+                if tex then return tex end
+            end
         end
-        return nil
-    end)
-    if ok and result then return result end
+    end
 
-    -- Try as texture path
-    local texOk, tex = pcall(function()
-        return getTexture(iconStr)
-    end)
-    if texOk and tex then return tex end
+    -- Try as direct texture path
+    local tex = getTexture(iconStr)
+    if tex then return tex end
 
     return nil
 end
