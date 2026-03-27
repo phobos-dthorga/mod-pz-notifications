@@ -44,9 +44,10 @@ PN_Constants.ANIM_STATE_DONE         = "done"
 
 PN_Constants.DEFAULT_TOAST_DURATION  = 5        -- seconds
 PN_Constants.MAX_VISIBLE_TOASTS      = 3
-PN_Constants.TOAST_WIDTH             = 350      -- pixels
+PN_Constants.TOAST_WIDTH             = 450      -- pixels (wider to fit zone/agent names)
 PN_Constants.TOAST_MIN_HEIGHT        = 60       -- pixels (min, grows with content)
-PN_Constants.TOAST_MAX_HEIGHT        = 120      -- pixels (max, truncates beyond)
+PN_Constants.TOAST_MAX_HEIGHT        = 150      -- pixels (max, accommodates 3 wrapped lines)
+PN_Constants.TOAST_MAX_MESSAGE_LINES = 3        -- max message lines before truncation
 PN_Constants.TOAST_GAP               = 8        -- pixels between toasts
 PN_Constants.TOAST_MARGIN_TOP        = 40       -- pixels from top of screen
 PN_Constants.TOAST_MARGIN_RIGHT      = 20       -- pixels from right edge

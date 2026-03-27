@@ -123,6 +123,71 @@ function PN_NotificationPanel:prerender()
         ac.a, ac.r, ac.g, ac.b)
 end
 
+--- Truncate a string to fit within maxWidth pixels, appending "..." if needed.
+--- @param text string     The text to truncate
+--- @param font userdata   PZ UIFont for measurement
+--- @param maxWidth number  Maximum width in pixels
+--- @return string          The (possibly truncated) text
+local function truncateToWidth(text, font, maxWidth)
+    if not text or text == "" then return "" end
+    if getTextManager():MeasureStringX(font, text) <= maxWidth then
+        return text
+    end
+    while getTextManager():MeasureStringX(font, text .. "...") > maxWidth and #text > 1 do
+        text = string.sub(text, 1, #text - 1)
+    end
+    return text .. "..."
+end
+
+--- Word-wrap a string into multiple lines that fit within maxWidth pixels.
+--- Long single words are truncated with "..." on their own line.
+--- @param text string      The text to wrap
+--- @param font userdata    PZ UIFont for measurement
+--- @param maxWidth number   Maximum width in pixels
+--- @param maxLines number   Maximum number of lines (excess truncated)
+--- @return table            Array of line strings
+local function wordWrap(text, font, maxWidth, maxLines)
+    if not text or text == "" then return {} end
+    maxLines = maxLines or C.TOAST_MAX_MESSAGE_LINES
+
+    -- Fast path: single line fits
+    if getTextManager():MeasureStringX(font, text) <= maxWidth then
+        return { text }
+    end
+
+    local lines = {}
+    local words = {}
+    for word in text:gmatch("%S+") do words[#words + 1] = word end
+
+    local currentLine = ""
+    for _, word in ipairs(words) do
+        local testLine = currentLine == "" and word or (currentLine .. " " .. word)
+        if getTextManager():MeasureStringX(font, testLine) > maxWidth then
+            if currentLine ~= "" then
+                lines[#lines + 1] = currentLine
+                currentLine = word
+            else
+                -- Single word exceeds width — truncate the word itself
+                lines[#lines + 1] = truncateToWidth(word, font, maxWidth)
+                currentLine = ""
+            end
+        else
+            currentLine = testLine
+        end
+    end
+    if currentLine ~= "" then lines[#lines + 1] = currentLine end
+
+    -- Limit to maxLines (truncate last visible line with "...")
+    if #lines > maxLines then
+        lines[maxLines] = truncateToWidth(lines[maxLines], font, maxWidth)
+        for i = #lines, maxLines + 1, -1 do
+            table.remove(lines, i)
+        end
+    end
+
+    return lines
+end
+
 function PN_NotificationPanel:render()
     ISPanel.render(self)
 
@@ -139,35 +204,34 @@ function PN_NotificationPanel:render()
         textWidth = textWidth - C.ICON_SIZE - C.ICON_MARGIN_RIGHT
     end
 
-    -- Title
+    -- Title (single-line, truncated with "..." if too long)
     if notif.title then
         local tc = C.COLOUR_TITLE
         local titleFont = getTitleFont()
-        local truncTitle = notif.title
-        local titleW = getTextManager():MeasureStringX(titleFont, truncTitle)
-        if titleW > textWidth then
-            while getTextManager():MeasureStringX(titleFont, truncTitle .. "...") > textWidth and #truncTitle > 1 do
-                truncTitle = string.sub(truncTitle, 1, #truncTitle - 1)
-            end
-            truncTitle = truncTitle .. "..."
-        end
+        local truncTitle = truncateToWidth(notif.title, titleFont, textWidth)
         self:drawText(truncTitle, textX, textY, tc.r, tc.g, tc.b, tc.a, titleFont)
         textY = textY + getTextManager():MeasureStringY(titleFont, truncTitle) + 2
     end
 
-    -- Message
+    -- Message (multi-line word-wrap, up to TOAST_MAX_MESSAGE_LINES)
     if notif.message then
         local mc = C.COLOUR_MESSAGE
         local msgFont = getMessageFont()
-        local truncMsg = notif.message
-        local msgW = getTextManager():MeasureStringX(msgFont, truncMsg)
-        if msgW > textWidth then
-            while getTextManager():MeasureStringX(msgFont, truncMsg .. "...") > textWidth and #truncMsg > 1 do
-                truncMsg = string.sub(truncMsg, 1, #truncMsg - 1)
-            end
-            truncMsg = truncMsg .. "..."
+        local lineH = getTextManager():MeasureStringY(msgFont, "Ag")
+        local msgLines = wordWrap(notif.message, msgFont, textWidth, C.TOAST_MAX_MESSAGE_LINES)
+        for i, line in ipairs(msgLines) do
+            self:drawText(line, textX, textY + (i - 1) * lineH,
+                mc.r, mc.g, mc.b, mc.a, msgFont)
         end
-        self:drawText(truncMsg, textX, textY, mc.r, mc.g, mc.b, mc.a, msgFont)
+
+        -- Dynamically adjust toast height based on wrapped line count
+        local msgHeight = #msgLines * lineH
+        local progressH = (notif.showProgress and C.PROGRESS_BAR_HEIGHT) or 0
+        local neededHeight = textY + msgHeight + C.TOAST_PADDING + progressH
+        local clampedHeight = math.max(C.TOAST_MIN_HEIGHT, math.min(C.TOAST_MAX_HEIGHT, neededHeight))
+        if math.abs(self.height - clampedHeight) > 2 then
+            self:setHeight(clampedHeight)
+        end
     end
 
     -- Close button
